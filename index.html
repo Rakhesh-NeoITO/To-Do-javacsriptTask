@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<link href="/dist/output.css" rel="stylesheet">
+<body class="w-full h-screen flex items-center justify-center">
+ 
+  <div id="mainDiv" class="w-11/12  sm:w-3/4 bg-gradient-to-r from-blue-300 to-blue-900 flex flex-col items-center gap-0 absolute">
+    <h1 class="text-xl sm:text-3xl text-white font-bold mt-5 mb-5">MAKE LIFE ORGANIZED</h1>
+    <div class="flex w-full justify-between">
+      <form  id="todoForm" class="w-full flex justify-center"  >
+        <input type="text"  maxlength="35" value="" placeholder="Enter your task here..." id="initialTextField" class="w-9/12 h-10 rounded-md font-semibold p-3">
+        <button  type="submit" id="addButton" class=" w-10 h-10 ml-5 border-2 rounded-md flex items-center justify-center">
+          <img src="./icons/plus-solid.svg" alt="" class="h-6 m-1 text-white fill-stone-50">
+        </button>
+      </form>
+    </div>
+
+    <div class="flex justify-between w-4/5 items-center  ">
+      <div class="flex">
+        <div class="mt-3 mb-3 to-do h-8 w-8 border-2 border-white-700 rounded-full bg-orange-700" title="To Do"></div>
+        <div class="m-3 completed h-8 w-8 border-2 border-white-700 rounded-full bg-green-700" title="Completed"></div>
+      </div>
+      <div class="mr-2" >
+        <label for="status" class="text-white font-semibold mr-2">Filter</label>
+        <select name="status" id="status" class="rounded w-20 sm:w-36 pl-2">
+        <option value="all">All</option>
+        <option value="to-do">To Do</option>
+        <option value="completed">Completed</option>
+        </select>
+      </div>
+    </div>
+
+    <div class=" w-full m-auto flex flex-col items-center   " id="taskContainer">
+      
+      <!-- <div class="w-10/12 h-32 bg-orange-700 rounded-md flex flex-col sm:flex-row items-center justify-evenly sm:justify-between p-5 mb-5">
+        <form >
+          <input type="text" maxlength="35" name="" id="" value="Task will show here..." readonly class="bg-inherit text-white font-bold text-lg w-11/12 focus:outline-none">
+        </form>
+        <div class="flex flex-row sm:flex-col gap-2 ">
+          <button class="h-8 w-8 border-2 rounded-full">
+            <img src="./icons/pen-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
+          </button>
+          <button class="h-8 w-8 border-2 rounded-full">
+            <img src="./icons/check-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
+          </button>
+          <button id="removeTask" class="h-8 w-8 border-2 rounded-full">
+            <img src="./icons/trash-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
+          </button>
+        </div>
+      </div>
+
+      <div class="w-10/12 h-32 bg-orange-700 rounded-md flex flex-col sm:flex-row items-center justify-evenly sm:justify-between p-5 mb-5">
+        <form >
+          <input type="text" maxlength="35" name="" id="" value="Task will show here..." readonly class="bg-inherit text-white font-bold text-lg w-11/12 focus:outline-none">
+        </form>
+        <div class="flex flex-row sm:flex-col gap-2 ">
+          <button class="h-8 w-8 border-2 rounded-full">
+            <img src="./icons/pen-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
+          </button>
+          <button class="h-8 w-8 border-2 rounded-full">
+            <img src="./icons/check-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
+          </button>
+          <button id="removeTask" class="h-8 w-8 border-2 rounded-full">
+            <img src="./icons/trash-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
+          </button>
+        </div>
+      </div>
+
+      <div class="w-10/12 h-32 bg-orange-700 rounded-md flex flex-col sm:flex-row items-center justify-evenly sm:justify-between p-5 mb-5">
+        <form >
+          <input type="text" maxlength="35" name="" id="" value="Task will show here..." readonly class="bg-inherit text-white font-bold text-lg w-11/12 focus:outline-none">
+        </form>
+        <div class="flex flex-row sm:flex-col gap-2 ">
+          <button class="h-8 w-8 border-2 rounded-full">
+            <img src="./icons/pen-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
+          </button>
+          <button class="h-8 w-8 border-2 rounded-full">
+            <img src="./icons/check-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
+          </button>
+          <button id="removeTask" class="h-8 w-8 border-2 rounded-full">
+            <img src="./icons/trash-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
+          </button>
+        </div>
+      </div>
+
+      <div class="w-10/12 h-32 bg-orange-700 rounded-md flex flex-col sm:flex-row items-center justify-evenly sm:justify-between p-5 mb-5">
+        <form >
+          <input type="text" maxlength="35" name="" id="" value="Task will show here..." readonly class="bg-inherit text-white font-bold text-lg w-11/12 focus:outline-none">
+        </form>
+        <div class="flex flex-row sm:flex-col gap-2 ">
+          <button class="h-8 w-8 border-2 rounded-full">
+            <img src="./icons/pen-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
+          </button>
+          <button class="h-8 w-8 border-2 rounded-full">
+            <img src="./icons/check-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
+          </button>
+          <button id="removeTask" class="h-8 w-8 border-2 rounded-full">
+            <img src="./icons/trash-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
+          </button>
+        </div>
+      </div> -->
+
+    </div>
+    
+
+  </div>
+
+  <div class="alertDiv gap-2 p-1 sm:p-4 h-28 sm:h-16 w-3/4 sm:w-2/3 bg-white border-4 border-green-500 absolute rounded-2xl hidden items-center justify-between" id="successDiv">
+    <img class="h-5 w-5 " src="./icons/successTick.svg" alt="">
+    <span class="flex flex-col ">
+      <span class="text-green-600 font-extrabold tracking-wide ">SUCCESS!</span>  
+    <span>The action has successfully completed :)</span>
+    </span> 
+    <button onclick="closeAlert(event)" class="h-6 w-6 sm:h-4 sm:w-4 "><img src="./icons/closeGreen.svg" alt=""></button>
+
+  </div>
+
+  <div class="alertDiv gap-4 p-1 sm:p-4 h-28 sm:h-16 w-3/4 sm:w-2/3 bg-white border-4 border-red-500 absolute rounded-2xl  items-center justify-between hidden" id="errorDiv">
+    <img class="h-4 w-4 sm:h-5 sm:w-5" src="./icons/errorX.svg" alt="">
+    <span class="flex flex-col">
+      <span class="text-red-600 font-extrabold tracking-wide ">ERROR!</span>  
+    <span>Oops some error occured</span>
+    </span> 
+    <button onclick="closeAlert(event)" class=" h-4 w-4"><img src="./icons/closeRed.svg" alt=""></button>
+
+  </div>
+
+  <div class="deleteConfirm gap-4 p-1 sm:p-4 h-28 sm:h-16 w-3/4 sm:w-2/3 bg-white border-4 border-red-500 absolute rounded-2xl  items-center justify-between hidden" id="deleteConfirm">
+    <img class="h-10 w-10" src="./icons/errorX.svg" alt="">
+    
+      <span class="text-red-600 font-extrabold tracking-wide ">Do you want to delete the entire task!</span>  
+    
+    <div>
+      <button class="deleteTask h-4 w-4 mr-4"><img src="./icons/circle-check-solid.svg" alt=""></button>
+    <button onclick="undoDelete(event)" class=" h-4 w-4"><img src="./icons/closeRed.svg" alt=""></button>
+    </div>
+
+  </div>
+
+  <div class="blurBackGround h-screen w-screen absolute bg-white bg-opacity-30 hidden">
+
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
