@@ -11,11 +11,10 @@ window.onload = () => {
       let newTask = document.createElement('div');
       newTask.className = 'newTask'
       newTask.style.width = '85%';
+
       if(element.backgroundColor != "green") {
         
-      newTask.innerHTML = `
-            <div  class="taskDiv  h-32  rounded-md flex flex-col sm:flex-row items-center justify-evenly sm:justify-between p-5 mb-5">
-            
+        newTask.innerHTML = `<div  class="taskDiv  h-32  rounded-md flex flex-col sm:flex-row items-center justify-evenly sm:justify-between p-5 mb-5">
             <div>
             <span class="taskAddDate text-white">${element.time}</span>
             <input type="text" maxlength="35" name=""  value="${element.text}" readonly class="inputField  bg-inherit text-white font-bold text-lg w-11/12 focus:outline-none">
@@ -33,16 +32,15 @@ window.onload = () => {
                 </button>
               </div>
             </div>`;
-            taskContainer.prepend(newTask);
-            newTask.querySelector('.taskDiv').style.backgroundColor = "#c05621";
-            let taskObj = {
-              text:element.text,
-              time:element.time,
-              backgroundColor: 'orange'
-            };
-            localArray.push(taskObj );
+        taskContainer.prepend(newTask);
+        newTask.querySelector('.taskDiv').style.backgroundColor = "#c05621";
+        let taskObj = {
+          text:element.text,
+          time:element.time,
+          backgroundColor: 'orange'
+        };
+        localArray.push(taskObj );
       } else {
-        
         newTask.innerHTML = `
             <div  class="taskDiv  h-32  rounded-md flex flex-col sm:flex-row items-center justify-evenly sm:justify-between p-5 mb-5">
             <div>
@@ -62,66 +60,63 @@ window.onload = () => {
                 </button>
               </div>
             </div>`;
-          taskContainer.prepend(newTask);
-          newTask.querySelector('.taskDiv').style.backgroundColor = "#276749";
-          let taskObj = {
-            text:element.text,
-            time:element.time,
-            backgroundColor: 'green'
-          };
-          localArray.push(taskObj );
+        taskContainer.prepend(newTask);
+        newTask.querySelector('.taskDiv').style.backgroundColor = "#276749";
 
-            let undoButton = newTask.querySelector('.undoComplete');
-            let taskDiv = newTask.querySelector('.taskDiv');
-            let inputField = newTask.querySelector('.inputField');
-            let taskDate = newTask.querySelector('.taskAddDate').innerText;
-            let removeButton = newTask.querySelector('.removeTask')
-            
-            let completeButton = `<button  class="completeTask h-8 w-8 border-2 rounded-full" onclick="completeTask(event)">
-                <img src="./icons/check-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
-              </button>`;
-              undoButton.addEventListener("click", function () {
-              taskDiv.style.backgroundColor ="#c05621";
-              inputField.style.textDecoration = "none";
+        let taskObj = {
+          text:element.text,
+          time:element.time,
+          backgroundColor: 'green'
+        };
 
-              let todoList = JSON.parse(localStorage.getItem("todoList"));
-              todoList.forEach(element => {
-                if(element.time == taskDate) {
-                  element.backgroundColor = "orange";
-                }
-              });
-              localStorage.clear();
-              localStorage.setItem("todoList", JSON.stringify(todoList));
+        localArray.push(taskObj );
+
+        let undoButton = newTask.querySelector('.undoComplete');
+        let taskDiv = newTask.querySelector('.taskDiv');
+        let inputField = newTask.querySelector('.inputField');
+        let taskDate = newTask.querySelector('.taskAddDate').innerText;
+        let removeButton = newTask.querySelector('.removeTask')
         
-              undoButton.remove();
-              removeButton.insertAdjacentHTML('beforebegin', completeButton);
-      
+        let completeButton = `<button  class="completeTask h-8 w-8 border-2 rounded-full" onclick="completeTask(event)">
+            <img src="./icons/check-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
+          </button>`;
+
+          undoButton.addEventListener("click", function () {
+            taskDiv.style.backgroundColor ="#c05621";
+            inputField.style.textDecoration = "none";
+
+            let todoList = JSON.parse(localStorage.getItem("todoList"));
+            todoList.forEach(element => {
+              if(element.time == taskDate) {
+                element.backgroundColor = "orange";
+              }
             });
+            localStorage.clear();
+            localStorage.setItem("todoList", JSON.stringify(todoList));
+      
+            undoButton.remove();
+            removeButton.insertAdjacentHTML('beforebegin', completeButton);
+          });
       }
 
-            if(taskContainer.querySelectorAll('.taskDiv').length = 0) {
-              taskContainer.style.height = 'auto';
-            } else if(taskContainer.querySelectorAll('.taskDiv').length > 3) {
-              taskContainer.style.height = '440' + 'px';
-              taskContainer.style.overflow = 'auto';
+      if(taskContainer.querySelectorAll('.taskDiv').length = 0) {
+        taskContainer.style.height = 'auto';
+      } else if(taskContainer.querySelectorAll('.taskDiv').length > 3) {
+                taskContainer.style.height = '440' + 'px';
+                taskContainer.style.overflow = 'auto';
 
-              let allTasks = taskContainer.querySelectorAll('.taskDiv');
-              taskContainer.addEventListener('scroll', function() {
-                allTasks.forEach(task => {
-                 
-                  if( task.getBoundingClientRect().bottom < 775 ) task.style.visibility = 'visible';
-                  else  task.style.visibility = 'hidden';
-
-                }); 
-              })
-            }
-
+                let allTasks = taskContainer.querySelectorAll('.taskDiv');
+                taskContainer.addEventListener('scroll', function() {
+                  allTasks.forEach(task => {
+                    if( task.getBoundingClientRect().bottom < 775 ) task.style.visibility = 'visible';
+                    else  task.style.visibility = 'hidden';
+                  }); 
+                });
+              }
     });
   }
   localStorage.setItem("todoList", JSON.stringify(localArray));
-  
 }
-
 
 // Add button
 todoForm.addEventListener("submit", function (e) {
@@ -263,8 +258,6 @@ function editTask(event) {
     editButton.remove();
     
     buttonDiv.insertAdjacentHTML('afterbegin', saveButtonDiv);
-
-    
       
     // Save Button
     let saveButton = parentDiv.querySelector('.saveTask')
@@ -277,10 +270,10 @@ function editTask(event) {
             element.backgroundColor = "orange";
           }
         });
+
         localStorage.clear();
         localStorage.setItem("todoList", JSON.stringify(todoList));
-
-        
+ 
         inputField.readOnly = true;
         inputField.style.borderWidth = "0px";
         inputField.style.borderColor = "none";
@@ -342,52 +335,52 @@ function editTask(event) {
 
 // Complete Button
 function completeTask(event) {
-  let parentDiv = event.target.closest(".taskDiv");
-      let buttonDiv = parentDiv.querySelector(".buttonDiv");
-      let inputField = parentDiv.querySelector(".inputField");
-      let completeButton = parentDiv.querySelector(".completeTask");
-      let removeButton = parentDiv.querySelector('.removeTask');
-      let taskDate = parentDiv.querySelector('.taskAddDate').innerText;
-          
-      parentDiv.style.backgroundColor = "#276749";
-      inputField.style.textDecoration = "line-through";
-      inputField.style.textDecorationColor = "black";
-      inputField.style.textDecorationThickness = "4px";
-      let undoButtonDiv = `<button   class="undoComplete h-8 w-8 border-2 rounded-full">
-          <img src="./icons/rotate-left-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
-          </button>`;
+    let parentDiv = event.target.closest(".taskDiv");
+    let buttonDiv = parentDiv.querySelector(".buttonDiv");
+    let inputField = parentDiv.querySelector(".inputField");
+    let completeButton = parentDiv.querySelector(".completeTask");
+    let removeButton = parentDiv.querySelector('.removeTask');
+    let taskDate = parentDiv.querySelector('.taskAddDate').innerText;
+        
+    parentDiv.style.backgroundColor = "#276749";
+    inputField.style.textDecoration = "line-through";
+    inputField.style.textDecorationColor = "black";
+    inputField.style.textDecorationThickness = "4px";
+    let undoButtonDiv = `<button   class="undoComplete h-8 w-8 border-2 rounded-full">
+        <img src="./icons/rotate-left-solid.svg" alt="" class="h-4  text-white fill-stone-50 m-auto">
+        </button>`;
 
-          completeButton.remove();
-          removeButton.insertAdjacentHTML('beforebegin', undoButtonDiv);
+    completeButton.remove();
+    removeButton.insertAdjacentHTML('beforebegin', undoButtonDiv);
 
 
-      let todoList = JSON.parse(localStorage.getItem("todoList"));
-      todoList.forEach(element => {
-        if(element.time == taskDate) {
-          element.backgroundColor = "green";
-        }
-      });
-      localStorage.clear();
-      localStorage.setItem("todoList", JSON.stringify(todoList));
+    let todoList = JSON.parse(localStorage.getItem("todoList"));
+    todoList.forEach(element => {
+      if(element.time == taskDate) {
+        element.backgroundColor = "green";
+      }
+    });
+    localStorage.clear();
+    localStorage.setItem("todoList", JSON.stringify(todoList));
 
-      // Undo Button
-      let undoButton = parentDiv.querySelector('.undoComplete')
-        undoButton.addEventListener("click", function () {
-          parentDiv.style.backgroundColor ="#c05621";
-          inputField.style.textDecoration = "none";
+    // Undo Button
+    let undoButton = parentDiv.querySelector('.undoComplete')
+      undoButton.addEventListener("click", function () {
+        parentDiv.style.backgroundColor ="#c05621";
+        inputField.style.textDecoration = "none";
 
-            let todoList = JSON.parse(localStorage.getItem("todoList"));
-            todoList.forEach(element => {
-              if(element.time == taskDate) {
-                element.backgroundColor = "orange";
-              }
-            });
-            localStorage.clear();
-            localStorage.setItem("todoList", JSON.stringify(todoList));
-      
-          buttonDiv.replaceChild(completeButton, undoButton);
-      
-      });
+          let todoList = JSON.parse(localStorage.getItem("todoList"));
+          todoList.forEach(element => {
+            if(element.time == taskDate) {
+              element.backgroundColor = "orange";
+            }
+          });
+          localStorage.clear();
+          localStorage.setItem("todoList", JSON.stringify(todoList));
+    
+        buttonDiv.replaceChild(completeButton, undoButton);
+    
+    });
 }
 
 // Remove Task
@@ -400,28 +393,32 @@ function removeTask(event) {
   deleteConfirm.style.zIndex = 111;
   deleteConfirm.style.display = 'flex';
   let deletetask = deleteConfirm.querySelector('.deleteTask');
-   let result = deletetask.addEventListener('click', function (event) {
+
+  let result = deletetask.addEventListener('click', function (event) {
     event.target.closest('.deleteConfirm').style.display = 'none';
     document.querySelector('.blurBackGround').style.display = 'none';
     selectDiv.remove();
+
     if(taskContainer.querySelectorAll('.taskDiv').length <= 3) {
       taskContainer.style.height = 'auto';
       taskContainer.style.overflow = 'hidden';
     }
 
-      let todoList = JSON.parse(localStorage.getItem("todoList"));
+    let todoList = JSON.parse(localStorage.getItem("todoList"));
 
-      let localStorageFiltered = todoList.filter(  
-        (list) => list.time !== taskDate
-      );
-      localArray = [];
-      
-      localStorage.clear();
-      localStorageFiltered.forEach((element) => {
-        localArray.push(element);
-      });
-      localStorage.setItem("todoList", JSON.stringify(localArray));
-   } )
+    let localStorageFiltered = todoList.filter(  
+      (list) => list.time !== taskDate
+    );
+
+    localArray = [];
+    localStorage.clear();
+
+    localStorageFiltered.forEach((element) => {
+      localArray.push(element);
+    });
+
+    localStorage.setItem("todoList", JSON.stringify(localArray));
+  } )
      
 }
 
@@ -432,15 +429,17 @@ function undoDelete(event) {
 
 // Filtering
 let filterStatus = document.getElementById("status");
+
 filterStatus.addEventListener("change", function () {
   let tasksList = document.querySelectorAll(".taskDiv");
   let taskArray = Array.from(tasksList);
 
   if (filterStatus.value == "all") {
+
     taskArray.forEach((element) => {
       element.style.display = "flex";
-      
     });
+
     if(taskArray.length >= 3) {
       taskContainer.style.height = '440' + 'px';
       taskContainer.style.overflow = 'auto';
@@ -448,10 +447,11 @@ filterStatus.addEventListener("change", function () {
   }
 
   if (filterStatus.value == "completed") {
+
     taskArray.forEach((element) => {
       element.style.display = "none";
-      
     });
+
     let result = taskArray.filter(
       (task) => task.style.backgroundColor == "rgb(39, 103, 73)"
     );
@@ -459,6 +459,7 @@ filterStatus.addEventListener("change", function () {
     result.forEach((element) => {
       element.style.display = "flex";
     });
+
     if(result.length <= 3) {
       taskContainer.style.height = 'auto';
       taskContainer.style.overflow = 'hidden';
@@ -472,6 +473,7 @@ filterStatus.addEventListener("change", function () {
     taskArray.forEach((element) => {
       element.style.display = "none";
     });
+
     let result = taskArray.filter(
       (task) => task.style.backgroundColor != "rgb(39, 103, 73)"
     );
@@ -479,6 +481,7 @@ filterStatus.addEventListener("change", function () {
     result.forEach((element) => {
       element.style.display = "flex";
     });
+
     if(result.length <= 3) {
       taskContainer.style.height = 'auto';
       taskContainer.style.overflow = 'hidden';
@@ -486,7 +489,6 @@ filterStatus.addEventListener("change", function () {
       taskContainer.style.height = '440' + 'px';
       taskContainer.style.overflow = 'auto';
     }
-
   }
 });
 
