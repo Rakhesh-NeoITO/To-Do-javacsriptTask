@@ -106,15 +106,10 @@ window.onload = () => {
               taskContainer.style.overflow = 'auto';
 
               let allTasks = taskContainer.querySelectorAll('.taskDiv');
-
-              allTasks.forEach(element => {
-              
-                console.log(element, element.getBoundingClientRect().bottom);
-              });
               taskContainer.addEventListener('scroll', function() {
                 allTasks.forEach(task => {
                  
-                  if( task.getBoundingClientRect().bottom < 775 && task.getBoundingClientRect().top > 110) task.style.visibility = 'visible';
+                  if( task.getBoundingClientRect().bottom < 775 ) task.style.visibility = 'visible';
                   else  task.style.visibility = 'hidden';
 
                 }); 
@@ -446,6 +441,10 @@ filterStatus.addEventListener("change", function () {
       element.style.display = "flex";
       
     });
+    if(taskArray.length >= 3) {
+      taskContainer.style.height = '440' + 'px';
+      taskContainer.style.overflow = 'auto';
+    }
   }
 
   if (filterStatus.value == "completed") {
@@ -460,6 +459,13 @@ filterStatus.addEventListener("change", function () {
     result.forEach((element) => {
       element.style.display = "flex";
     });
+    if(result.length <= 3) {
+      taskContainer.style.height = 'auto';
+      taskContainer.style.overflow = 'hidden';
+    }else {
+      taskContainer.style.height = '440' + 'px';
+      taskContainer.style.overflow = 'auto';
+    }
   }
 
   if (filterStatus.value == "to-do") {
@@ -473,6 +479,13 @@ filterStatus.addEventListener("change", function () {
     result.forEach((element) => {
       element.style.display = "flex";
     });
+    if(result.length <= 3) {
+      taskContainer.style.height = 'auto';
+      taskContainer.style.overflow = 'hidden';
+    }else {
+      taskContainer.style.height = '440' + 'px';
+      taskContainer.style.overflow = 'auto';
+    }
 
   }
 });
@@ -483,9 +496,3 @@ function createBlurBackground() {
  blurBackGround.style.zIndex = 100;
 
 }
-
-
-
-
-
-
