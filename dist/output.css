@@ -513,8 +513,20 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.visible {
+  visibility: visible;
+}
+
 .absolute {
   position: absolute;
+}
+
+.z-auto {
+  z-index: auto;
+}
+
+.z-10 {
+  z-index: 10;
 }
 
 .m-1 {
@@ -559,6 +571,10 @@ video {
 
 .mr-4 {
   margin-right: 1rem;
+}
+
+.block {
+  display: block;
 }
 
 .flex {
@@ -743,14 +759,9 @@ video {
   background-color: rgb(192 86 33 / var(--tw-bg-opacity));
 }
 
-.bg-\[\#2f855a\] {
+.bg-black {
   --tw-bg-opacity: 1;
-  background-color: rgb(47 133 90 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#276749\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(39 103 73 / var(--tw-bg-opacity));
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-30 {

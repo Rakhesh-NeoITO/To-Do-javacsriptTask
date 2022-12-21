@@ -15,6 +15,7 @@ window.onload = () => {
         
       newTask.innerHTML = `
             <div  class="taskDiv  h-32  rounded-md flex flex-col sm:flex-row items-center justify-evenly sm:justify-between p-5 mb-5">
+            
             <div>
             <span class="taskAddDate text-white">${element.time}</span>
             <input type="text" maxlength="35" name=""  value="${element.text}" readonly class="inputField  bg-inherit text-white font-bold text-lg w-11/12 focus:outline-none">
@@ -103,15 +104,29 @@ window.onload = () => {
             } else if(taskContainer.querySelectorAll('.taskDiv').length > 3) {
               taskContainer.style.height = '440' + 'px';
               taskContainer.style.overflow = 'auto';
+
+              let allTasks = taskContainer.querySelectorAll('.taskDiv');
+
+              allTasks.forEach(element => {
+              
+                console.log(element, element.getBoundingClientRect().bottom);
+              });
+              taskContainer.addEventListener('scroll', function() {
+                allTasks.forEach(task => {
+                 
+                  if( task.getBoundingClientRect().bottom < 775 && task.getBoundingClientRect().top > 110) task.style.visibility = 'visible';
+                  else  task.style.visibility = 'hidden';
+
+                }); 
+              })
             }
 
-            
-          
     });
   }
   localStorage.setItem("todoList", JSON.stringify(localArray));
   
 }
+
 
 // Add button
 todoForm.addEventListener("submit", function (e) {
@@ -137,6 +152,7 @@ todoForm.addEventListener("submit", function (e) {
 
     newTask.innerHTML = `
           <div  class="taskDiv  h-32 bg-[#c05621] rounded-md flex flex-col sm:flex-row items-center justify-evenly sm:justify-between p-5 mb-5">
+          
           <div>
           <span class="taskAddDate text-white"> ${year}:${month}:${date}, ${hour}:${minute}:${second}</span>
           <input type="text" maxlength="35" name=""  value="${initialTextField.value}" readonly class="inputField bg-inherit text-white font-bold text-lg w-11/12 focus:outline-none">
@@ -162,11 +178,6 @@ todoForm.addEventListener("submit", function (e) {
           };
           localArray.push(taskObj );
           localStorage.setItem("todoList", JSON.stringify(localArray));
-          // console.log(localArray);
-
-          
-          
-          //console.log(todoList);
          
     taskContainer.prepend(newTask);
 
@@ -175,7 +186,9 @@ todoForm.addEventListener("submit", function (e) {
     } else if(taskContainer.querySelectorAll('.taskDiv').length > 3) {
       taskContainer.style.height = '440' + 'px';
       taskContainer.style.overflow = 'auto';
-      console.log(taskContainer.querySelectorAll('.taskDiv').length, 'dd')
+      taskContainer.scrollTo(pageXOffset, 0);
+      
+      
     }
     
     createBlurBackground();
@@ -186,8 +199,7 @@ todoForm.addEventListener("submit", function (e) {
     setTimeout(function() {
      succeessDiv.style.display = 'none';
       document.querySelector('.blurBackGround').style.display = 'none';
-    },500)
-    
+    }, 1000)
   } else {
     createBlurBackground();
     errorDiv.style.zIndex = 111;
@@ -196,12 +208,11 @@ todoForm.addEventListener("submit", function (e) {
     setTimeout(function() {
       errorDiv.style.display = 'none';
        document.querySelector('.blurBackGround').style.display = 'none';
-     },500);
+     },1000);
 
     setTimeout(function() {
       initialTextField.focus()
-    },500)
-
+    },1000)
   }
 
   initialTextField.value = "";
@@ -316,7 +327,7 @@ function editTask(event) {
         setTimeout(function() {
           succeessDiv.style.display = 'none';
            document.querySelector('.blurBackGround').style.display = 'none';
-         },500)
+         },1000)
 
       } else {
         createBlurBackground();
@@ -326,10 +337,10 @@ function editTask(event) {
         setTimeout(function() {
           errorDiv.style.display = 'none';
            document.querySelector('.blurBackGround').style.display = 'none';
-         },500);
+         },1000);
         setTimeout(function() {
           inputField.focus()
-        },500)
+        },1000)
       }
     });
 }
@@ -472,3 +483,9 @@ function createBlurBackground() {
  blurBackGround.style.zIndex = 100;
 
 }
+
+
+
+
+
+
